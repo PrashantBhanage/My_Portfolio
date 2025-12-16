@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prashant | Portfolio</title>
+  <style>
+    .about-image img,
+.project-card,
+.about-card,
+.contact-card {
+  will-change: transform;
+}
+
+    section{
+  scroll-margin-top:110px;
+}
+
+    .scroll-down.hide{
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    .scroll-down svg{
+  animation:float 2s ease-in-out infinite;
+}
+
+    /* ===== RESUME BUTTON ===== */
+.resume-btn{
+  display:inline-block;
+  margin-bottom:20px;
+  padding:14px 28px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#22d3ee,#a78bfa);
+  color:#020617;
+  font-size:16px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.4s;
+}
+
+.resume-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 40px rgba(99,102,241,.5);
+}
+
+    .socials a:hover{
+box-shadow: 0 20px 40px rgba(0,0,0,.45);
+
+
+}
+
+
+    .open-popup{
+  background: linear-gradient(135deg,#22d3ee,#a78bfa);
+  color:#020617;
+  border:none;
+  padding:10px 18px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.open-popup:hover{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(99,102,241,.45);
+}
+
+    /* ===== PROJECT POPUP ===== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+}
+
+.popup-content{
+  background:#020617;
+  padding:40px;
+  border-radius:24px;
+  max-width:600px;
+  width:90%;
+  color:#e5e7eb;
+  box-shadow:0 30px 60px rgba(0,0,0,.6);
+  position:relative;
+}
+
+.popup-content h3{
+  font-size:28px;
+  margin-bottom:20px;
+}
+
+.popup-content p{
+  color:#c7d2fe;
+  margin-bottom:20px;
+}
+
+.popup-content ul{
+  padding-left:20px;
+}
+
+.popup-content li{
+  margin-bottom:10px;
+  color:#9ca3af;
+}
+
+.close-popup{
+  position:absolute;
+  top:20px;
+  right:24px;
+  font-size:28px;
+  cursor:pointer;
+  color:#9ca3af;
+}
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    html { scroll-behavior: auto; }
+
+    body {
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      color: #e5e7eb; line-height: 1.8; overflow-x: hidden;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes float { 0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)} }
+
+    /* ===== NAVBAR ===== */
+    header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(2,6,23,0.92); /* solid-ish */
+
+
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 30px 80px; animation: fadeUp .8s ease forwards;
+    }
+    header h1 {
+      font-size: 32px;
+      letter-spacing: 4px;
+      background: linear-gradient(90deg,#22d3ee,#818cf8,#a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    nav a {
+      color: #a5b4fc;
+      margin-left: 40px;
+      text-decoration: none;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      position: relative;
+      transition: color .3s ease;
+    }
+    nav a:hover { color: #ffffff; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#22d3ee,#818cf8);
+      border-radius: 4px;
+      transform: translateX(-50%);
+      transition: width .35s ease;
+    }
+    nav a:hover::after { width: 100%; }
+
+    /* ===== ACTIVE NAV (PURE CSS) ===== */
+    section:target ~ header nav a { opacity: .4; }
+    #about:target ~ header nav a[href="#about"],
+    #skills:target ~ header nav a[href="#skills"],
+    #projects:target ~ header nav a[href="#projects"],
+    #contact:target ~ header nav a[href="#contact"] {
+      color: #ffffff;
+    }
+
+    #about:target ~ header nav a[href="#about"]::after,
+    #skills:target ~ header nav a[href="#skills"]::after,
+    #projects:target ~ header nav a[href="#projects"]::after,
+    #contact:target ~ header nav a[href="#contact"]::after {
+      width: 100%;
+    }
+    nav a:hover::after { width: 100%; }
+
+    /* ===== HERO (HOME) ===== */
+    .home{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:visible;
+      padding:120px 40px 80px;
+    }
+    .home::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(34,211,238,.25), transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(139,92,246,.25), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(99,102,241,.25), transparent 50%);
+      z-index:0;
+    }
+    .avatar{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  margin:0 auto 30px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#22d3ee,#a78bfa);
+  box-shadow:0 0 0 6px rgba(255,255,255,.08);
+  z-index:1;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+.avatar img{
+  transition: transform .4s ease;
+}
+
+.avatar:hover img{
+  transform: scale(1.05);
+}
+
+
+    .home-content{position:relative;z-index:1;max-width:1000px}
+    .home h2{
+      font-size:72px;
+      margin-bottom:20px;
+      font-weight:700;
+    }
+    .home h2 span{
+      background:linear-gradient(135deg,#22d3ee,#818cf8,#a78bfa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .home .tagline{
+      font-size:26px;
+      color:#c7d2fe;
+      margin-bottom:30px;
+    }
+    .home .desc{
+      font-size:20px;
+      color:#9ca3af;
+      max-width:800px;
+      margin:0 auto 50px;
+    }
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin-bottom:40px;
+    }
+    .socials a{
+      width:52px;height:52px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      font-size:22px;
+      transition:.4s;
+    }
+    /* ===== SOCIAL ICON IMAGES ===== */
+.socials a img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  filter: invert(1);
+}
+
+
+    .socials a:hover{
+      background:linear-gradient(135deg,#22d3ee,#a78bfa);
+      transform:translateY(-4px);
+    }
+ .scroll-down{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#22d3ee;
+  opacity:0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay:1.5s;
+}
+
+    /* ===== SECTIONS ===== */
+    section { padding: 140px 80px; }
+    section h3 {
+      font-size: 48px;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg,#38bdf8,#818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    section p {
+      font-size: 20px;
+      color: #c7d2fe;
+      max-width: 1000px;
+    }
+
+    /* ===== ABOUT (MODERN) ===== */
+    .about-modern{
+      padding:140px 80px;
+    }
+    .about-header{
+      text-align:center;
+      margin-bottom:80px;
+    }
+    .about-header h2{
+      font-size:64px;
+      font-weight:700;
+    }
+    .about-header h2 span{
+      background:linear-gradient(135deg,#22d3ee,#a78bfa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .about-line{
+      width:120px;height:4px;
+      margin:20px auto 0;
+      background:linear-gradient(90deg,#22d3ee,#a78bfa);
+      border-radius:4px;
+    }
+    .about-content{
+  display:grid;
+  grid-template-columns:1.3fr 1.2fr; /* image gets more space */
+  gap:80px;
+  align-items:center;
+}
+
+  .about-image{
+  width:100%;
+  height:420px;           /* 👈 KEY FIX */
+  display:flex;
+  align-items:center;
+}
+
+.about-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:24px;
+  background:rgba(255,255,255,0.95);
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+
+
+    .about-text p{
+      font-size:20px;
+      color:#c7d2fe;
+      margin-bottom:28px;
+    }
+    .about-cards{
+      display:grid;
+      gap:24px;
+      margin-top:40px;
+    }
+    .about-card{
+      display:flex;
+      gap:20px;
+      background:rgba(17,24,39,.9);
+      padding:26px 30px;
+      border-radius:20px;
+      box-shadow:0 20px 40px rgba(0,0,0,.45);
+      transition:.4s;
+    }
+    .about-card:hover{
+      transform:translateY(-6px);
+    }
+   .about-icon{
+  width:52px;
+  height:52px;
+  min-width:52px;              /* 👈 prevents stretching */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:linear-gradient(135deg,#22d3ee,#a78bfa);
+  font-size:22px;
+  line-height:1;               /* 👈 FIXES vertical weirdness */
+}
+.about-icon img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+}
+.about-icon{
+  background:linear-gradient(135deg,#38bdf8,#818cf8);
+}
+
+
+
+    .about-card h4{
+      font-size:22px;
+      margin-bottom:6px;
+    }
+    .about-card span{
+      color:#9ca3af;
+      font-size:16px;
+    }
+
+    @media(max-width:1000px){
+      .about-content{grid-template-columns:1fr}
+      .about-header h2{font-size:48px}
+    }
+
+    /* ===== SKILLS ===== */
+    .skills {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 35px; margin-top: 60px;
+    }
+    .skill {
+  text-align: center;
+  font-size: 22px;
+}
+
+    }
+    .skill strong { display: block; font-size: 26px; margin-bottom: 12px; }
+    .skill span { color: #9ca3af; }
+
+    /* ===== PROJECTS (MODERN) ===== */
+    .projects-modern{
+      padding:140px 80px;
+    }
+    .projects-header{
+      text-align:center;
+      margin-bottom:80px;
+    }
+    .projects-header h2{
+      font-size:64px;
+      font-weight:700;
+    }
+    .projects-header h2 span{
+      background:linear-gradient(135deg,#22d3ee,#a78bfa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .projects-line{
+      width:140px;height:4px;
+      margin:20px auto 0;
+      background:linear-gradient(90deg,#22d3ee,#a78bfa);
+      border-radius:4px;
+    }
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:60px;
+    }
+    .project-card{
+      background:rgba(17,24,39,.9);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:0 30px 60px rgba(0,0,0,.5);
+      transition:.5s;
+    }
+    .project-card:hover{transform:translateY(-10px)}
+    .project-image{
+      position:relative;
+      height:260px;
+      overflow:hidden;
+    }
+    .project-image img{
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .6s ease;
+    }
+    .project-card:hover img{transform:scale(1.1)}
+    .project-float{
+      position:absolute;
+      top:20px;right:20px;
+      width:56px;height:56px;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,#22d3ee,#a78bfa);
+      font-size:22px;color:#020617;
+    }
+    .project-body{
+      padding:30px 34px;
+    }
+    .project-body h4{
+      font-size:26px;margin-bottom:14px;
+    }
+    .project-body p{
+      font-size:18px;color:#9ca3af;margin-bottom:24px;
+    }
+    .project-actions{
+      display:flex;gap:24px;
+    }
+    .project-actions a{
+      display:flex;align-items:center;gap:8px;
+      font-size:16px;color:#e5e7eb;text-decoration:none;
+      opacity:.85;transition:.3s;
+    }
+    .project-actions a:hover{opacity:1}
+    .project-tags{
+      display:flex;gap:14px;flex-wrap:wrap;
+    }
+    .project-tags span{
+      padding:8px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      font-size:14px;color:#22d3ee;
+    }
+    .project-card.large{
+      grid-column:1 / -1;
+    }
+
+    @media(max-width:1000px){
+      .projects-grid{grid-template-columns:1fr}
+      .projects-header h2{font-size:48px}
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline { border-left: 4px solid #6366f1; padding-left: 40px; margin-top: 60px; }
+    .timeline div { margin-bottom: 40px; }
+    .timeline h4 { font-size: 26px; }
+
+    /* ===== CONTACT (MODERN) ===== */
+    .contact-modern{padding:140px 80px}
+    .contact-header{text-align:center;margin-bottom:80px}
+    .contact-header h2{font-size:64px;font-weight:700}
+    .contact-header h2 span{background:linear-gradient(135deg,#22d3ee,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .contact-line{width:140px;height:4px;margin:20px auto 0;background:linear-gradient(90deg,#22d3ee,#a78bfa);border-radius:4px}
+
+    .contact-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:80px}
+    .contact-left h4{font-size:36px;margin-bottom:20px}
+    .contact-left p{font-size:18px;color:#9ca3af;margin-bottom:40px}
+
+    .contact-card{display:flex;align-items:center;gap:20px;background:rgba(17,24,39,.9);padding:26px 30px;border-radius:20px;margin-bottom:22px;box-shadow:0 20px 40px rgba(0,0,0,.45);transition:.4s}
+    .contact-card:hover{transform:translateY(-6px)}
+    .contact-card span{font-size:14px;color:#9ca3af}
+    .contact-card strong{font-size:18px}
+    .icon{width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(135deg,#22d3ee,#a78bfa);font-size:24px}
+.icon img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  filter: invert(1); /* makes it white */
+  display:block;
+}
+
+    .contact-form{
+  background: linear-gradient(180deg, rgba(17,24,39,.95), rgba(2,6,23,.95));
+  padding:44px;
+  border-radius:30px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.65),
+    inset 0 0 0 1px rgba(148,163,184,.08);
+}
+.contact-form label{
+  display:block;
+  font-size:13px;
+  letter-spacing:.5px;
+  color:#c7d2fe;
+  margin-bottom:8px;
+  margin-top:22px;
+}
+
+
+  
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  background-color:#020617 !important;
+  border:1px solid rgba(148,163,184,.22);
+  border-radius:16px;
+  padding:18px 20px;
+
+  color:#e5e7eb !important;
+  font-size:16px;
+  outline:none;
+
+  box-shadow:
+    inset 0 0 12px rgba(0,0,0,.6),
+    0 6px 18px rgba(0,0,0,.35);
+
+  transition:.25s ease;
+}
+.contact-form input:hover,
+.contact-form textarea:hover{
+  border-color:rgba(34,211,238,.4);
+}
+
+
+
+   .contact-form input:focus,
+.contact-form textarea:focus{
+  background-color:#020617;
+  border-color:#22d3ee;
+
+  box-shadow:
+    0 0 0 3px rgba(34,211,238,.25),
+    inset 0 0 16px rgba(34,211,238,.2),
+    0 10px 30px rgba(34,211,238,.15);
+}
+
+
+
+    .contact-form textarea{min-height:140px;resize:none}
+    .contact-form button{margin-top:32px;width:100%;padding:18px;border:none;border-radius:18px;font-size:18px;cursor:pointer;background:linear-gradient(135deg,#22d3ee,#a78bfa);color:#020617;transition:.4s}
+    .contact-form button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(99,102,241,.5)}
+
+    @media(max-width:1000px){.contact-wrap{grid-template-columns:1fr}.contact-header h2{font-size:48px}}
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 80px; font-size: 18px; color: #9ca3af;
+      background: #020617;
+    }
+
+    @media(max-width: 1000px) {
+      .hero { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      header, section, .hero { padding: 80px 30px; }
+      .hero h2 { font-size: 46px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PRASHANT</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="home" id="home">
+  <div class="home-content">
+    <div class="avatar">
+  <img src="me.jpg" alt="Prashant Profile Photo">
+</div>
+
+    <h2>Hi, I'm <span>Prashant</span></h2>
+    <div class="tagline">
+  BCA Final Year Student | Backend & Java Developer
+</div>
+
+<p class="desc">
+  I am a final-year BCA student focused on backend development.
+  I enjoy building real-world projects using Java. 
+</p>
+
+   <div class="socials">
+  <a href="https://github.com/PrashantBhanage"title="GitHub">
+    <img src="images/github.svg" alt="GitHub">
+  </a>
+
+  <a href="https://linkedin.com/in/imprashantbhanage"title="LinkedIn">
+    <img src="images/linkedin.svg" alt="LinkedIn">
+  </a>
+
+  <a href="#contact">
+    <img src="images/mail.svg" alt="Email">
+  </a>
+  
+
+
+</div>
+
+<a href="Prashant_Resume.pdf" download class="resume-btn">
+   Download Resume
+</a>
+
+   <div class="scroll-down">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+    <path d="M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M6 13l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+
+
+
+  </div>
+</section>
+
+<section id="about" class="about-modern">
+  <div class="about-header">
+    <h2>About <span>Me</span></h2>
+    <div class="about-line"></div>
+  </div>
+
+  <div class="about-content">
+    <!-- LEFT IMAGE -->
+    <div class="about-image">
+      <img src="images/8550.png" alt="">
+    </div>
+
+    <!-- RIGHT TEXT -->
+    <div class="about-text">
+      <p>
+  I’m a final-year BCA student who enjoys building systems, not just screens.
+  I’m more interested in how data flows, how servers respond, and why things
+  break than only how they look.
+</p>
+<p style="opacity:.85">
+  I prefer writing fewer features and understanding them deeply,
+  rather than building many things I don’t fully control.
+</p>
+
+<p>
+  I’ve built backend-focused projects using Java and MySQL where I handled
+  routing, database design, and real debugging — the kind that doesn’t come
+  with copy-paste answers. These projects helped me understand how
+  applications actually work behind the scenes.
+</p>
+
+
+
+      <div class="about-cards">
+        <div class="about-card">
+          <div class="about-icon">
+            <img src="images/Backend.svg" alt="">
+          </div>
+          <div>
+            <h4>Backend Focus</h4>
+<span>
+  Java backend development using HttpServer, JDBC, and MySQL.
+  Focused on logic, routing, and data handling.
+</span>
+
+
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">
+            <img src="images/thinking.svg" alt="">
+          </div>
+          <div>
+            <h4>Problem Solving</h4>
+<span>
+  Debugging runtime errors, fixing broken builds, and improving
+  backend logic through trial and failure.
+</span>
+
+
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">
+            <img src="images/learning.svg" alt="">
+          </div>
+          <div>
+            <h4>Continuous Learning</h4>
+<span>
+  Learning Linux, networking basics, and security concepts to
+  better understand real-world systems.
+</span>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h3>Skills & Technologies</h3>
+  <div class="skills">
+    <div class="card skill"><strong>Java</strong><span>OOP, HttpServer, JDBC</span></div>
+    <div class="card skill"><strong>ASP.NET Core</strong><span>MVC, APIs</span></div>
+    <div class="card skill"><strong>Linux</strong><span>Commands, Permissions</span></div>
+    <div class="card skill"><strong>Databases</strong><span>MySQL, Queries</span></div>
+    <div class="card skill"><strong>Frontend</strong><span>HTML, CSS(Portfolio & UI layouts)</span></div>
+    <div class="card skill"><strong>Concepts</strong><span>Networking, Security</span></div>
+  </div>
+</section>
+
+<section id="projects" class="projects-modern">
+  <div class="projects-header">
+    <h2>Featured <span>Projects</span></h2>
+    <div class="projects-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-image">
+        <img src="images/weather-app.png" alt="Weather Application Project">
+      </div>
+      <div class="project-body">
+        <h4>Weather Monitoring System</h4>
+        <p>
+  A Java-based weather application using HttpServer and MySQL.
+  Features include user management, weather data display,
+  routing, and database integration.
+</p>
+<button class="open-popup" data-popup="weatherPopup">View Details</button>
+
+
+        
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-image">
+       <img src="images/blog-app.png" alt="Blog Writing Platform">
+
+      </div>
+      <div class="project-body">
+        <h4>Blog Writing Platform</h4>
+<p>
+  A backend-focused blog application built with Java and MySQL.
+  Users can create, edit, and view posts using server-side routing.
+</p>
+<button class="open-popup" data-popup="blogPopup">View Details</button>
+
+        
+      </div>
+    </div>
+
+  
+
+  </div>
+</section>
+
+
+
+<section id="contact" class="contact-modern">
+  <div class="contact-header">
+    <h2>Get In <span>Touch</span></h2>
+    <div class="contact-line"></div>
+  </div>
+
+  <div class="contact-wrap">
+
+    <!-- LEFT -->
+    <div class="contact-left">
+      <h4>Let's work together</h4>
+      <p>
+        I'm always interested in hearing about new projects and opportunities.
+        Whether you have a question or just want to say hi, feel free to reach out!
+      </p>
+
+      <div class="contact-card">
+        <div class="icon">
+          <img src = "images/email.svg" alt="">
+        </div>
+        <div>
+          <span>Email</span>
+          <strong>prashantbhanage717@gmail.com</strong>
+
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon">
+           <img src = "images/call.svg" alt="">
+        </div>
+        <div>
+          <span>Phone</span>
+          <strong>Available on request</strong>
+
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon">
+           <img src = "images/location.svg" alt="">
+        </div>
+        <div>
+          <span>Location</span>
+          <strong>India</strong>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+  <form class="contact-form" onsubmit="sendMail(event)">
+  <label>Name</label>
+  <input type="text" id="name" required>
+
+  <label>Email</label>
+  <input type="email" id="email" required>
+
+  <label>Message</label>
+  <textarea id="message" required></textarea>
+
+  <button type="submit">Email Me</button>
+</form>
+
+
+
+
+
+  </div>
+</section>
+
+<footer>
+  © 2025 Prashant — Built with pure HTML & CSS
+</footer>
+<!-- ===== PROJECT POPUP ===== -->
+<div class="popup" id="weatherPopup">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+
+    <h3>Weather Monitoring System</h3>
+
+    <p>
+      This is a backend-focused Java project built using HttpServer and MySQL.
+      The application allows users to view weather data for different locations
+      and manages data using a database-driven approach.
+    </p>
+
+    <ul>
+      <li><strong>Backend:</strong> Java HttpServer</li>
+      <li><strong>Database:</strong> MySQL (JDBC, DAO pattern)</li>
+      <li><strong>Features:</strong> Routing, CRUD operations</li>
+      <li><strong>Learning:</strong> Server handling, DB integration, debugging</li>
+    </ul>
+  </div>
+</div>
+<script>
+  const openBtn = document.querySelector(".open-popup");
+  const popup = document.getElementById("weatherPopup");
+  const closeBtn = document.querySelector(".close-popup");
+
+  openBtn.onclick = () => {
+    popup.style.display = "flex";
+  };
+
+  closeBtn.onclick = () => {
+    popup.style.display = "none";
+  };
+
+  popup.onclick = (e) => {
+    if(e.target === popup){
+      popup.style.display = "none";
+    }
+  };
+</script>
+
+<!-- ===== WEATHER PROJECT POPUP ===== -->
+
+
+<!-- ===== BLOG PROJECT POPUP (ADD THIS BELOW) ===== -->
+<div class="popup" id="blogPopup">
+  <div class="popup-content">
+    <span class="close-popup">&times;</span>
+
+    <h3>Blog Writing Platform</h3>
+
+    <p>
+      This project is a backend-based blog application developed using Java
+      and MySQL. It allows users to create, edit, and view blog posts using
+      server-side routing.
+    </p>
+
+    <ul>
+      <li><strong>Backend:</strong> Java (HttpServer)</li>
+      <li><strong>Database:</strong> MySQL (JDBC, DAO)</li>
+      <li><strong>Features:</strong> CRUD operations</li>
+      <li><strong>Learning:</strong> Server logic, SQL, project structure</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== JS COMES AFTER THIS ===== -->
+<script>
+  
+</script>
+<script>
+  const openButtons = document.querySelectorAll(".open-popup");
+  const popups = document.querySelectorAll(".popup");
+  const closeButtons = document.querySelectorAll(".close-popup");
+
+  openButtons.forEach(btn => {
+    btn.onclick = () => {
+      const popupId = btn.getAttribute("data-popup");
+      document.getElementById(popupId).style.display = "flex";
+    };
+  });
+
+  closeButtons.forEach(btn => {
+    btn.onclick = () => {
+      btn.closest(".popup").style.display = "none";
+    };
+  });
+
+  popups.forEach(popup => {
+    popup.onclick = (e) => {
+      if (e.target === popup) {
+        popup.style.display = "none";
+      }
+    };
+  });
+</script>
+<script>
+  const scrollArrow = document.querySelector(".scroll-down");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      scrollArrow.classList.add("hide");
+    } else {
+      scrollArrow.classList.remove("hide");
+    }
+  });
+</script>
+
+
+<script>
+function sendMail(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  const body =
+    "Name: " + name + "%0D%0A" +
+    "Email: " + email + "%0D%0A%0D%0A" +
+    "Message:%0D%0A" + message;
+
+  window.location.href =
+    "mailto:prashantbhanage717@gmail.com" +
+    "?subject=Portfolio Contact" +
+    "&body=" + body;
+}
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
