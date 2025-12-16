@@ -644,6 +644,88 @@ box-shadow: 0 20px 40px rgba(0,0,0,.45);
       header, section, .hero { padding: 80px 30px; }
       .hero h2 { font-size: 46px; }
     }
+    /* ===============================
+   MOBILE FIXES (IMPORTANT)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  nav a {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  /* Hero section */
+  .home {
+    padding: 120px 20px 60px;
+  }
+
+  .home h2 {
+    font-size: 36px;
+  }
+
+  .home .tagline {
+    font-size: 18px;
+  }
+
+  .home .desc {
+    font-size: 16px;
+  }
+
+  /* Avatar */
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  /* Sections padding */
+  section {
+    padding: 80px 20px;
+  }
+
+  section h3 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  /* About layout */
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-image {
+    height: auto;
+  }
+
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact */
+  .contact-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-header h2 {
+    font-size: 42px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1058,4 +1140,5 @@ function sendMail(e) {
 </html>
 
 </body>
+
 </html>
